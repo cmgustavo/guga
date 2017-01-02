@@ -9,7 +9,8 @@
   "version": "0.0.1",
   "dependencies": {
     "bitcore": "*",
-    "bip38": "*"
+    "bip38": "^1.3.0",
+    "wif": "*"
   },
   "main": "guga.js",
   "description": "Bitcoin BIP38 password checker"
