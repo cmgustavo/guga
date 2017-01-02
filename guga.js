@@ -44,16 +44,9 @@ function getPrivateKey(encryptedPrivateKeyBase58, passphrase, opts, cb) {
 
   var privateKey = new bitcore.PrivateKey(privateKeyWif);
   var address = privateKey.publicKey.toAddress().toString();
-  if (address === addr) {
-    console.log('##### Addresses OK',address); //TODO
-  }
   var addrBuff = new Buffer(address, 'ascii');
   var actualChecksum = bitcore.crypto.Hash.sha256sha256(addrBuff).toString('hex').substring(0, 8);
   var expectedChecksum = bitcore.encoding.Base58Check.decode(encryptedPrivateKeyBase58).toString('hex').substring(6, 14);
-  if (actualChecksum === expectedChecksum) {
-    console.log('##### Checksum OK',actualChecksum); //TODO
-  }
-
   if (actualChecksum != expectedChecksum)
     return cb(new Error('Incorrect passphrase'));
 
@@ -62,7 +55,7 @@ function getPrivateKey(encryptedPrivateKeyBase58, passphrase, opts, cb) {
 
 for (i in passArr) {
   var pass = passArr[i];
-  console.log('***** Testing:', i, pass); //TODO
+  console.log('***** Check password (try ' + i + '): ' + pass); //TODO
 
   getPrivateKey(epk, pass, null, function(err, privateKey) {
     if (err) {
